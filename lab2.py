@@ -79,27 +79,6 @@ def get_polynomial_N(X, Y):
 def function_to_points(X, f): return [f(X[i]) for i in range(len(X))]
 
 
-def plot(a,b,n,f,cheb,L):
-    if cheb:
-        x = np.array(chebyshev(n, a, b))
-    else:
-        x = np.array(even(n, a, b))
-
-    y = f(x)
-    if L:
-        f2 = get_polynomial_L(x,y)
-    else:
-        f2 = get_polynomial_N(x,y)
-
-    x2 = np.linspace(a,b,2000)
-    y2 = f2(x2)
-    y3 = f(x2)
-    plt.plot(x2,y2,'g')
-    plt.plot(x2, y3, 'b')
-    plt.scatter(x,y,c='r',s=15,marker = 'o')
-    plt.show()
-
-
 def f_compare_max(X1,X2):
     diff = np.abs(X1 - X2)
     return np.max(diff)
@@ -109,9 +88,17 @@ def f_compare_sqr(X1,X2):
     diff = np.square(X1 - X2)
     return np.sum(diff)
 
+def plot(X,Y,f1,f2,a,b):
+    X2 = np.linspace(a,b,2000)
+    Y1 = f1(X2)
+    Y2 = f2(X2)
+    plt.plot(X2,Y1,'g')
+    plt.plot(X2, Y2, 'b')
+    plt.scatter(X,Y,c='r',s=15,marker = 'o')
+    plt.show()
 
 # (a,b) - scope, f - function, n - number of nodes, N - comparison precision
-def evaluate(a,b,f,n,N=1000):
+def evaluate(a,b,f,n):
     # Chebyshev's zeros
     xc = np.array(chebyshev(n, a, b))
     yc = f(xc)
@@ -125,7 +112,7 @@ def evaluate(a,b,f,n,N=1000):
     fel = get_polynomial_L(xe, ye)
     fen = get_polynomial_N(xe, ye)
 
-    X = np.linspace(a, b, N)
+    X = np.linspace(a, b,2000)
     Ycl = fcl(X)
     Ycn = fcn(X)
     Yel = fel(X)
@@ -133,6 +120,6 @@ def evaluate(a,b,f,n,N=1000):
 
 
 
+
 def f(x): return np.exp(-3*np.sin(3*x))
 
-plot(-2*pi,pi,30,f,True,False)
