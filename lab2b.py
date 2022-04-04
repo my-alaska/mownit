@@ -72,7 +72,7 @@ def f_compare_sqr(X1,X2):
 def f(x): return np.exp(-3*np.sin(3*x))
 def fd(x): return -9*np.cos(3*x)*np.exp(-3*np.sin(3*x))
 
-X = np.array(chebyshev(15,-2*pi,pi))
+X = np.array(chebyshev(19,-2*pi,pi))
 Y = f(X)
 Yd = fd(X)
 
