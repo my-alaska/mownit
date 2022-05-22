@@ -74,10 +74,10 @@ def f_compare_sqr(X1, X2):
 def f(x): return np.exp(-3 * np.sin(3 * x))
 
 
-X = np.array(even(51, -2 * pi, pi)) # węzły
+X = np.array(even(64, -2 * pi, pi)) # węzły
 Y = f(X)
 
-p = lsquares_tr(X, Y, 20,-2 * pi,pi) # stopień
+p = lsquares_tr(X, Y, 30,-2 * pi,pi) # stopień
 x = np.linspace(-2 * pi, pi, 2000)
 y1 = f(x)
 y2 = p(x)
